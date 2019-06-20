@@ -254,5 +254,34 @@ namespace CsharpSwatchesTest
 
         #endregion
 
+        #region DuplicateEncoder tests
+
+        [TestMethod]
+        public void DuplicateEncoder_1()
+        {
+            Assert.AreEqual("(((", CodeWarsKata.DuplicateEncoder("din"));
+        }
+
+        [TestMethod]
+        public void DuplicateEncoder_2()
+        {
+            Assert.AreEqual("()()()", CodeWarsKata.DuplicateEncoder("recede"));
+        }
+
+        [TestMethod]
+        public void DuplicateEncoder_3()
+        {
+            Assert.AreEqual(")())())", CodeWarsKata.DuplicateEncoder("Success"), "should ignore case");
+        }
+
+        [TestMethod]
+        public void DuplicateEncoder_4()
+        {
+            Assert.AreEqual("))((", CodeWarsKata.DuplicateEncoder("(( @"));
+        }
+
+        #endregion
+
+
     }
 }

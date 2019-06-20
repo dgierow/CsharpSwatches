@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace CsharpSwatches
 {
@@ -143,5 +144,31 @@ namespace CsharpSwatches
 
             return Enumerable.Range(lowerBound, upperBound - lowerBound + 1).Sum();
         }
+
+        internal static string DuplicateEncoder_v1(string word)
+        {
+            Dictionary<char, char> map = new Dictionary<char, char>();
+
+            List<char> chars = word.ToLower().ToList();
+            chars.ForEach(c => { if (map.ContainsKey(c)) map[c] = ')'; else map.Add(c, '('); });
+
+            var sb = new StringBuilder();
+            chars.ForEach(c => sb.Append(map[c]));
+
+            return sb.ToString();
+        }
+
+        internal static string DuplicateEncoder(string word)
+        {
+            var sb = new StringBuilder();
+            List<char> chars = word.ToLower().ToList();
+
+            foreach(char c in chars)
+                sb.Append(chars.Count(x => x == c) == 1 ? '(' : ')');
+
+            return sb.ToString();
+        }
+
+
     }
 }
