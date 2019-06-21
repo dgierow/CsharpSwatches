@@ -169,6 +169,55 @@ namespace CsharpSwatches
             return sb.ToString();
         }
 
+        internal static string YourOrderPlease_v1(string words)
+        {
+            if (string.IsNullOrEmpty(words))
+                return string.Empty;
 
+            string result = string.Empty;
+            string[] sorted = new string[10];
+
+            List<string> wordList = words.Split(new char[] { ' ' }).ToList();
+            foreach (string word in wordList)
+            {
+                char c = word.FirstOrDefault(x => char.IsDigit(x));
+                string s = c.ToString();
+                int index = int.Parse(s);
+                if (index > 0)
+                    sorted[index - 1] = word;
+            }
+
+            StringBuilder sb = new StringBuilder();
+            sorted.ToList().ForEach(x => { if (x != null) sb.Append(x + " ");  } );
+            result = sb.ToString().TrimEnd();
+
+            return result;
+        }
+
+        internal static string YourOrderPlease_v2(string words)
+        {
+            if (string.IsNullOrEmpty(words))
+                return string.Empty;
+
+            var wordList = words.Split(null);
+            string[] sorted = new string[wordList.Length];
+
+            foreach (string word in wordList)
+            {
+                int index = int.Parse(word.FirstOrDefault(x => char.IsDigit(x)).ToString()) -1;
+                sorted[index] = word;
+            }
+
+            return string.Join(" ", sorted);
+        }
+
+        internal static string YourOrderPlease(string words)
+        {
+            if (string.IsNullOrEmpty(words))
+                return words;
+
+            string[] sorted = words.Split(null).OrderBy(x => x.ToList().Find(c => char.IsDigit(c))).ToArray();
+            return string.Join(" ", sorted);
+        }
     }
 }
